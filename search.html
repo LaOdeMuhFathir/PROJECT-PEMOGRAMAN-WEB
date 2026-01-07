@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cari Beasiswa - PINTAR-BEASISWA</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .search-hero {
+            background: linear-gradient(135deg, #73ABBC 0%, #77AFC0 100%);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        .search-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .search-box {
+            background: white;
+            border-radius: 50px;
+            padding: 0.5rem;
+            display: flex;
+            margin-top: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .search-input {
+            flex: 1;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            border-radius: 50px 0 0 50px;
+        }
+        
+        .search-input:focus {
+            outline: none;
+        }
+        
+        .search-button {
+            background: #F5D68B;
+            border: none;
+            padding: 0 2rem;
+            border-radius: 0 50px 50px 0;
+            cursor: pointer;
+            color: #333;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+        
+        .search-button:hover {
+            background: #E2DDB7;
+        }
+        
+        .filters-section {
+            padding: 2rem 0;
+            background: white;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .filters-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: center;
+        }
+        
+        .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .filter-select {
+            padding: 0.5rem 1rem;
+            border: 2px solid #E2DDB7;
+            border-radius: 10px;
+            background: white;
+            color: #333;
+        }
+        
+        .results-section {
+            padding: 3rem 0;
+        }
+        
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        .results-count {
+            color: #666;
+        }
+        
+        .sort-select {
+            padding: 0.5rem 1rem;
+            border: 2px solid #E2DDB7;
+            border-radius: 10px;
+            background: white;
+            color: #333;
+        }
+        
+        .scholarships-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+        
+        .scholarship-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .scholarship-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .card-header {
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #F5D68B 0%, #E2DDB7 100%);
+        }
+        
+        .card-header h3 {
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+        
+        .card-institution {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .card-body {
+            padding: 1.5rem;
+        }
+        
+        .scholarship-details {
+            margin-bottom: 1.5rem;
+        }
+        
+        .detail-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            color: #555;
+        }
+        
+        .detail-item i {
+            color: #73ABBC;
+            width: 20px;
+        }
+        
+        .match-badge {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .match-high {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        
+        .match-medium {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        
+        .match-low {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        
+        .deadline-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            padding: 0.3rem 0.8rem;
+            background-color: #f8d7da;
+            color: #721c24;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .card-footer {
+            padding: 1.5rem;
+            border-top: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 3rem;
+        }
+        
+        .page-link {
+            padding: 0.5rem 1rem;
+            border: 2px solid #E2DDB7;
+            background: white;
+            color: #333;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .page-link:hover {
+            background: #E2DDB7;
+        }
+        
+        .page-link.active {
+            background: #73ABBC;
+            color: white;
+            border-color: #73ABBC;
+        }
+        
+        .no-results {
+            text-align: center;
+            padding: 3rem;
+            color: #666;
+        }
+        
+        .no-results i {
+            font-size: 3rem;
+            color: #E2DDB7;
+            margin-bottom: 1rem;
+        }
+        
+        @media (max-width: 768px) {
+            .scholarships-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .results-header {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: flex-start;
+            }
+            
+            .search-box {
+                flex-direction: column;
+                border-radius: 20px;
+            }
+            
+            .search-input {
+                border-radius: 20px 20px 0 0;
+            }
+            
+            .search-button {
+                border-radius: 0 0 20px 20px;
+                padding: 1rem;
+            }
+            
+            .filters-container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <nav class="navbar container">
+            <div class="logo-container">
+                <img src="LOGO NEXTRE.png" alt="Logo PINTAR-BEASISWA" class="logo">
+                <a href="index.html" style="text-decoration: none;">
+                    <div class="logo-text">PINTAR-BEASISWA</div>
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Beranda</a></li>
+                <li><a href="home.html">Tentang Kami</a></li>
+                <li><a href="search.html" class="active">Cari Beasiswa</a></li>
+                <li><a href="login.html" class="btn btn-secondary">Masuk</a></li>
+                <li><a href="register.html" class="btn btn-primary">Daftar Gratis</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="search-hero">
+            <div class="container search-container">
+                <h1>Temukan Beasiswa Impian Anda</h1>
+                <p>Cari dari ratusan beasiswa yang tersedia dengan filter cerdas</p>
+                
+                <div class="search-box">
+                    <input type="text" 
+                           class="search-input" 
+                           placeholder="Cari beasiswa berdasarkan nama, institusi, atau kata kunci..."
+                           id="searchKeyword">
+                    <button class="search-button" onclick="performSearch()">
+                        <i class="fas fa-search"></i> Cari
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="filters-section">
+            <div class="container">
+                <div class="filters-container">
+                    <div class="filter-group">
+                        <label for="educationLevel">Jenjang:</label>
+                        <select id="educationLevel" class="filter-select" onchange="filterScholarships()">
+                            <option value="">Semua</option>
+                            <option value="sma">SMA</option>
+                            <option value="d3">D3</option>
+                            <option value="s1">S1/D4</option>
+                            <option value="s2">S2</option>
+                            <option value="s3">S3</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="category">Kategori:</label>
+                        <select id="category" class="filter-select" onchange="filterScholarships()">
+                            <option value="">Semua</option>
+                            <option value="akademik">Akademik</option>
+                            <option value="non-akademik">Non-Akademik</option>
+                            <option value="penuh">Beasiswa Penuh</option>
+                            <option value="parsial">Beasiswa Parsial</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="deadline">Batas Waktu:</label>
+                        <select id="deadline" class="filter-select" onchange="filterScholarships()">
+                            <option value="">Semua</option>
+                            <option value="7">≤ 7 hari</option>
+                            <option value="30">≤ 30 hari</option>
+                            <option value="90">≤ 3 bulan</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="location">Lokasi:</label>
+                        <select id="location" class="filter-select" onchange="filterScholarships()">
+                            <option value="">Semua</option>
+                            <option value="3t">Daerah 3T</option>
+                            <option value="non-3t">Non-3T</option>
+                            <option value="internasional">Internasional</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="match">Kecocokan:</label>
+                        <select id="match" class="filter-select" onchange="filterScholarships()">
+                            <option value="">Semua</option>
+                            <option value="high">Tinggi (≥80%)</option>
+                            <option value="medium">Sedang (50-79%)</option>
+                            <option value="low">Rendah (<50%)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="results-section">
+            <div class="container">
+                <div class="results-header">
+                    <div>
+                        <h2>Beasiswa Tersedia</h2>
+                        <p class="results-count" id="resultsCount">Menampilkan 12 dari 245 beasiswa</p>
+                    </div>
+                    
+                    <div>
+                        <label for="sortBy">Urutkan:</label>
+                        <select id="sortBy" class="sort-select" onchange="sortScholarships()">
+                            <option value="match">Kecocokan Tertinggi</option>
+                            <option value="deadline">Batas Waktu Terdekat</option>
+                            <option value="amount">Jumlah Terbesar</option>
+                            <option value="name">Nama A-Z</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="scholarships-grid" id="scholarshipsContainer">
+                    <!-- Scholarship cards will be loaded here -->
+                </div>
+                
+                <div class="no-results" id="noResults" style="display: none;">
+                    <i class="fas fa-search"></i>
+                    <h3>Beasiswa tidak ditemukan</h3>
+                    <p>Coba gunakan kata kunci lain atau sesuaikan filter pencarian Anda</p>
+                </div>
+                
+                <div class="pagination" id="pagination">
+                    <!-- Pagination will be generated here -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container footer-content">
+            <div class="footer-logo">
+                <img src="LOGO NEXTRE.png" alt="Logo" class="logo" style="height: auto;">
+                <p style="height: auto;">PINTAR-BEASISWA © 2024</p>
+            </div>
+            <ul class="footer-links">
+                <li><a href="home.html">Tentang Kami</a></li>
+                <li><a href="about.html">Kebijakan Privasi</a></li>
+                <li><a href="contact.html">Kontak</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script>
+        // Mock data for scholarships
+        const scholarshipsData = [
+            {
+                id: 1,
+                title: "Beasiswa KIP Kuliah",
+                institution: "Kemendikbudristek",
+                educationLevel: "s1",
+                category: "penuh",
+                deadline: "2024-07-15",
+                location: "non-3t",
+                amount: "Rp 2.400.000/semester",
+                match: 95,
+                description: "Beasiswa untuk mahasiswa S1/D4 dari keluarga kurang mampu"
+            },
+            {
+                id: 2,
+                title: "Beasiswa LPDP",
+                institution: "Kementerian Keuangan",
+                educationLevel: "s2",
+                category: "penuh",
+                deadline: "2024-06-30",
+                location: "internasional",
+                amount: "Full Scholarship + Living Allowance",
+                match: 85,
+                description: "Beasiswa untuk studi S2/S3 di dalam dan luar negeri"
+            },
+            {
+                id: 3,
+                title: "Beasiswa Bidikmisi",
+                institution: "Kemendikbudristek",
+                educationLevel: "s1",
+                category: "penuh",
+                deadline: "2024-08-01",
+                location: "non-3t",
+                amount: "Rp 1.500.000/bulan",
+                match: 75,
+                description: "Beasiswa untuk mahasiswa berprestasi dari keluarga kurang mampu"
+            },
+            {
+                id: 4,
+                title: "Beasiswa Djarum",
+                institution: "Djarum Foundation",
+                educationLevel: "s1",
+                category: "akademik",
+                deadline: "2024-09-15",
+                location: "non-3t",
+                amount: "Rp 7.000.000/semester",
+                match: 60,
+                description: "Beasiswa untuk mahasiswa berprestasi di perguruan tinggi mitra"
+            },
+            {
+                id: 5,
+                title: "Beasiswa Bank Indonesia",
+                institution: "Bank Indonesia",
+                educationLevel: "s1",
+                category: "akademik",
+                deadline: "2024-10-01",
+                location: "non-3t",
+                amount: "Rp 5.000.000/bulan",
+                match: 70,
+                description: "Beasiswa untuk mahasiswa ekonomi dan perbankan"
+            },
+            {
+                id: 6,
+                title: "Beasiswa 3T",
+                institution: "Kemendikbudristek",
+                educationLevel: "sma",
+                category: "penuh",
+                deadline: "2024-07-30",
+                location: "3t",
+                amount: "Rp 1.000.000/bulan",
+                match: 90,
+                description: "Beasiswa khusus untuk siswa di daerah 3T"
+            },
+            {
+                id: 7,
+                title: "Beasiswa Unggulan",
+                institution: "Kemendikbudristek",
+                educationLevel: "s2",
+                category: "penuh",
+                deadline: "2024-08-15",
+                location: "internasional",
+                amount: "Full Scholarship",
+                match: 80,
+                description: "Beasiswa untuk mahasiswa berprestasi tinggi"
+            },
+            {
+                id: 8,
+                title: "Beasiswa Olahraga",
+                institution: "Kemenpora",
+                educationLevel: "s1",
+                category: "non-akademik",
+                deadline: "2024-09-30",
+                location: "non-3t",
+                amount: "Rp 3.000.000/bulan",
+                match: 55,
+                description: "Beasiswa untuk atlet berprestasi yang kuliah"
+            }
+        ];
+
+        let currentPage = 1;
+        const itemsPerPage = 6;
+        let filteredScholarships = [...scholarshipsData];
+
+        document.addEventListener('DOMContentLoaded', function() {
+            renderScholarships();
+            setupSearch();
+        });
+
+        function setupSearch() {
+            const searchInput = document.getElementById('searchKeyword');
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    performSearch();
+                }
+            });
+        }
+
+        function performSearch() {
+            const keyword = document.getElementById('searchKeyword').value.toLowerCase();
+            currentPage = 1;
+            
+            filteredScholarships = scholarshipsData.filter(scholarship => {
+                const searchText = scholarship.title.toLowerCase() + 
+                                 scholarship.institution.toLowerCase() + 
+                                 scholarship.description.toLowerCase();
+                return searchText.includes(keyword);
+            });
+            
+            filterScholarships();
+        }
+
+        function filterScholarships() {
+            const educationLevel = document.getElementById('educationLevel').value;
+            const category = document.getElementById('category').value;
+            const deadline = document.getElementById('deadline').value;
+            const location = document.getElementById('location').value;
+            const match = document.getElementById('match').value;
+            const keyword = document.getElementById('searchKeyword').value.toLowerCase();
+
+            filteredScholarships = scholarshipsData.filter(scholarship => {
+                let matches = true;
+                
+                // Filter by keyword
+                if (keyword) {
+                    const searchText = scholarship.title.toLowerCase() + 
+                                     scholarship.institution.toLowerCase() + 
+                                     scholarship.description.toLowerCase();
+                    if (!searchText.includes(keyword)) matches = false;
+                }
+                
+                // Filter by education level
+                if (educationLevel && scholarship.educationLevel !== educationLevel) {
+                    matches = false;
+                }
+                
+                // Filter by category
+                if (category) {
+                    if (category === 'akademik' && scholarship.category !== 'akademik') matches = false;
+                    if (category === 'non-akademik' && scholarship.category !== 'non-akademik') matches = false;
+                    if (category === 'penuh' && scholarship.category !== 'penuh') matches = false;
+                    if (category === 'parsial' && scholarship.category !== 'parsial') matches = false;
+                }
+                
+                // Filter by deadline
+                if (deadline) {
+                    const daysUntilDeadline = Math.ceil((new Date(scholarship.deadline) - new Date()) / (1000 * 60 * 60 * 24));
+                    if (daysUntilDeadline > parseInt(deadline)) matches = false;
+                }
+                
+                // Filter by location
+                if (location && scholarship.location !== location) {
+                    matches = false;
+                }
+                
+                // Filter by match percentage
+                if (match) {
+                    if (match === 'high' && scholarship.match < 80) matches = false;
+                    if (match === 'medium' && (scholarship.match < 50 || scholarship.match >= 80)) matches = false;
+                    if (match === 'low' && scholarship.match >= 50) matches = false;
+                }
+                
+                return matches;
+            });
+            
+            currentPage = 1;
+            renderScholarships();
+        }
+
+        function sortScholarships() {
+            const sortBy = document.getElementById('sortBy').value;
+            
+            filteredScholarships.sort((a, b) => {
+                switch(sortBy) {
+                    case 'match':
+                        return b.match - a.match;
+                    case 'deadline':
+                        return new Date(a.deadline) - new Date(b.deadline);
+                    case 'amount':
+                        const amountA = parseInt(a.amount.replace(/\D/g, ''));
+                        const amountB = parseInt(b.amount.replace(/\D/g, ''));
+                        return amountB - amountA;
+                    case 'name':
+                        return a.title.localeCompare(b.title);
+                    default:
+                        return 0;
+                }
+            });
+            
+            renderScholarships();
+        }
+
+        function renderScholarships() {
+            const container = document.getElementById('scholarshipsContainer');
+            const noResults = document.getElementById('noResults');
+            const resultsCount = document.getElementById('resultsCount');
+            
+            if (filteredScholarships.length === 0) {
+                container.innerHTML = '';
+                noResults.style.display = 'block';
+                resultsCount.textContent = 'Menampilkan 0 dari 0 beasiswa';
+                document.getElementById('pagination').innerHTML = '';
+                return;
+            }
+            
+            noResults.style.display = 'none';
+            
+            // Calculate pagination
+            const startIndex = (currentPage - 1) * itemsPerPage;
+            const endIndex = startIndex + itemsPerPage;
+            const currentScholarships = filteredScholarships.slice(startIndex, endIndex);
+            const totalPages = Math.ceil(filteredScholarships.length / itemsPerPage);
+            
+            // Update results count
+            resultsCount.textContent = `Menampilkan ${startIndex + 1}-${Math.min(endIndex, filteredScholarships.length)} dari ${filteredScholarships.length} beasiswa`;
+            
+            // Render scholarship cards
+            container.innerHTML = '';
+            currentScholarships.forEach(scholarship => {
+                const card = createScholarshipCard(scholarship);
+                container.appendChild(card);
+            });
+            
+            // Render pagination
+            renderPagination(totalPages);
+        }
+
+        function createScholarshipCard(scholarship) {
+            const daysUntilDeadline = Math.ceil((new Date(scholarship.deadline) - new Date()) / (1000 * 60 * 60 * 24));
+            const matchClass = scholarship.match >= 80 ? 'match-high' : 
+                              scholarship.match >= 50 ? 'match-medium' : 'match-low';
+            const matchText = scholarship.match >= 80 ? 'Cocok Tinggi' : 
+                             scholarship.match >= 50 ? 'Cocok Sedang' : 'Cocok Rendah';
+            
+            const div = document.createElement('div');
+            div.className = 'scholarship-card';
+            div.onclick = () => viewScholarshipDetail(scholarship.id);
+            div.style.cursor = 'pointer';
+            
+            div.innerHTML = `
+                <div class="card-header">
+                    <h3>${scholarship.title}</h3>
+                    <p class="card-institution">${scholarship.institution}</p>
+                </div>
+                <div class="card-body">
+                    <span class="match-badge ${matchClass}">${matchText} (${scholarship.match}%)</span>
+                    <p style="color: #666; margin-bottom: 1rem;">${scholarship.description}</p>
+                    
+                    <div class="scholarship-details">
+                        <div class="detail-item">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span>Jenjang: ${getEducationLevelText(scholarship.educationLevel)}</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-money-bill-wave"></i>
+                            <span>Jumlah: ${scholarship.amount}</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Lokasi: ${getLocationText(scholarship.location)}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <span class="deadline-badge">
+                        <i class="fas fa-clock"></i>
+                        ${daysUntilDeadline > 0 ? `Tutup dalam ${daysUntilDeadline} hari` : 'Pendaftaran ditutup'}
+                    </span>
+                    <button class="btn btn-primary" onclick="event.stopPropagation(); applyScholarship(${scholarship.id})">
+                        Lihat Detail
+                    </button>
+                </div>
+            `;
+            
+            return div;
+        }
+
+        function getEducationLevelText(level) {
+            const levels = {
+                'sma': 'SMA/Sederajat',
+                'd3': 'D3',
+                's1': 'S1/D4',
+                's2': 'S2',
+                's3': 'S3'
+            };
+            return levels[level] || level;
+        }
+
+        function getLocationText(location) {
+            const locations = {
+                '3t': 'Daerah 3T',
+                'non-3t': 'Non-3T',
+                'internasional': 'Internasional'
+            };
+            return locations[location] || location;
+        }
+
+        function renderPagination(totalPages) {
+            const pagination = document.getElementById('pagination');
+            pagination.innerHTML = '';
+            
+            // Previous button
+            if (currentPage > 1) {
+                const prevButton = document.createElement('button');
+                prevButton.className = 'page-link';
+                prevButton.innerHTML = '<i class="fas fa-chevron-left"></i>';
+                prevButton.onclick = () => changePage(currentPage - 1);
+                pagination.appendChild(prevButton);
+            }
+            
+            // Page numbers
+            for (let i = 1; i <= totalPages; i++) {
+                const pageButton = document.createElement('button');
+                pageButton.className = `page-link ${i === currentPage ? 'active' : ''}`;
+                pageButton.textContent = i;
+                pageButton.onclick = () => changePage(i);
+                pagination.appendChild(pageButton);
+            }
+            
+            // Next button
+            if (currentPage < totalPages) {
+                const nextButton = document.createElement('button');
+                nextButton.className = 'page-link';
+                nextButton.innerHTML = '<i class="fas fa-chevron-right"></i>';
+                nextButton.onclick = () => changePage(currentPage + 1);
+                pagination.appendChild(nextButton);
+            }
+        }
+
+        function changePage(page) {
+            currentPage = page;
+            renderScholarships();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function viewScholarshipDetail(id) {
+            alert(`Melihat detail beasiswa ID: ${id}`);
+            // window.location.href = `scholarship-detail.html?id=${id}`;
+        }
+
+        function applyScholarship(id) {
+            if (confirm(`Apakah Anda ingin melihat detail beasiswa ini?`)) {
+                viewScholarshipDetail(id);
+            }
+        }
+    </script>
+</body>
+</html>

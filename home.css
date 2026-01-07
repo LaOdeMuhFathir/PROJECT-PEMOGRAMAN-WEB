@@ -1,0 +1,285 @@
+/* Home Page Specific Styles */
+.about-hero {
+    background: linear-gradient(135deg, #73ABBC 0%, #77AFC0 100%);
+    color: white;
+    padding: 4rem 0;
+    text-align: center;
+}
+
+.about-hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+}
+
+.tagline {
+    font-size: 1.5rem;
+    opacity: 0.9;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.mission-section {
+    padding: 4rem 0;
+    background-color: #F5D68B;
+}
+
+.mission-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.mission-content h2 {
+    color: #333;
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.mission-content p {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: #555;
+}
+
+.sdg-section {
+    padding: 5rem 0;
+    background-color: white;
+}
+
+.sdg-content {
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.sdg-image {
+    flex: 1;
+}
+
+.sdg-image img {
+    max-width: 300px;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.sdg-text {
+    flex: 2;
+}
+
+.sdg-text h3 {
+    color: #73ABBC;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.sdg-text p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+    color: #555;
+}
+
+.sdg-list {
+    list-style: none;
+}
+
+.sdg-list li {
+    margin-bottom: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #333;
+}
+
+.sdg-list i {
+    color: #73ABBC;
+}
+
+.team-section {
+    padding: 5rem 0;
+    background: linear-gradient(135deg, #F5D68B 0%, #E2DDB7 100%);
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.team-card {
+    background: white;
+    border-radius: 15px;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.team-card:hover {
+    transform: translateY(-10px);
+}
+
+.team-avatar {
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(135deg, #73ABBC 0%, #77AFC0 100%);
+    border-radius: 50%;
+    margin: 0 auto 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.team-avatar i {
+    color: white;
+    font-size: 2.5rem;
+}
+
+.team-card h3 {
+    color: #333;
+    margin-bottom: 0.5rem;
+    font-size: 1.3rem;
+}
+
+.role {
+    color: #73ABBC;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.description {
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+}
+
+.skills span {
+    background-color: #E2DDB7;
+    color: #333;
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.features-section {
+    padding: 5rem 0;
+    background-color: white;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.feature-item {
+    text-align: center;
+    padding: 2rem;
+    border-radius: 10px;
+    background: linear-gradient(145deg, #f8f8f8, #ffffff);
+    box-shadow: 5px 5px 15px #e6e6e6, -5px -5px 15px #ffffff;
+}
+
+.feature-icon {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, #73ABBC 0%, #77AFC0 100%);
+    border-radius: 50%;
+    margin: 0 auto 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.feature-icon i {
+    color: white;
+    font-size: 1.8rem;
+}
+
+.feature-item h3 {
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+.feature-item p {
+    color: #666;
+    line-height: 1.6;
+}
+
+.cta-section {
+    padding: 5rem 0;
+    background: linear-gradient(135deg, #73ABBC 0%, #77AFC0 100%);
+    color: white;
+    text-align: center;
+}
+
+.cta-content h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.cta-content p {
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto 2rem;
+    opacity: 0.9;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .sdg-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .sdg-image img {
+        max-width: 200px;
+    }
+    
+    .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .about-hero h1 {
+        font-size: 2.5rem;
+    }
+    
+    .tagline {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .team-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .cta-content h2 {
+        font-size: 2rem;
+    }
+}

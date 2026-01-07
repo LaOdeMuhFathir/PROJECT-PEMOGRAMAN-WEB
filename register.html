@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar - PINTAR-BEASISWA</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .auth-container {
+            min-height: calc(100vh - 200px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        
+        .auth-card {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 600px;
+        }
+        
+        .auth-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .auth-header h1 {
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+        
+        .auth-header p {
+            color: #666;
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 2px solid #E2DDB7;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: #73ABBC;
+        }
+        
+        .password-input {
+            position: relative;
+        }
+        
+        .toggle-password {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #666;
+            cursor: pointer;
+        }
+        
+        .password-strength {
+            margin-top: 0.5rem;
+            height: 5px;
+            background: #eee;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        
+        .strength-meter {
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        .strength-meter.weak { width: 33%; background: #e74c3c; }
+        .strength-meter.medium { width: 66%; background: #f39c12; }
+        .strength-meter.strong { width: 100%; background: #2ecc71; }
+        
+        .strength-text {
+            font-size: 0.8rem;
+            margin-top: 0.3rem;
+            color: #666;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .checkbox-group input[type="checkbox"] {
+            margin-top: 0.2rem;
+        }
+        
+        .checkbox-group label {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .checkbox-group a {
+            color: #73ABBC;
+            text-decoration: none;
+        }
+        
+        .auth-footer {
+            text-align: center;
+            margin-top: 2rem;
+            color: #666;
+        }
+        
+        .auth-footer a {
+            color: #73ABBC;
+            text-decoration: none;
+        }
+        
+        .error-message {
+            color: #e74c3c;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+        
+        .error-message.show {
+            display: block;
+        }
+        
+        .step-indicator {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .step {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #E2DDB7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-weight: 600;
+        }
+        
+        .step.active {
+            background: #73ABBC;
+            color: white;
+        }
+        
+        .step-content {
+            display: none;
+        }
+        
+        .step-content.active {
+            display: block;
+        }
+        
+        .step-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .auth-card {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <nav class="navbar container">
+            <div class="logo-container">
+                <img src="LOGO NEXTRE.png" alt="Logo PINTAR-BEASISWA" class="logo">
+                <a href="index.html" style="text-decoration: none;">
+                    <div class="logo-text">PINTAR-BEASISWA</div>
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Beranda</a></li>
+                <li><a href="home.html">Tentang Kami</a></li>
+                <li><a href="login.html" class="btn btn-secondary">Masuk</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="auth-container">
+            <div class="auth-card">
+                <div class="auth-header">
+                    <h1>Daftar Akun Baru</h1>
+                    <p>Bergabung dengan ribuan pelajar lainnya</p>
+                </div>
+                
+                <div class="step-indicator">
+                    <div class="step active">1</div>
+                    <div class="step">2</div>
+                    <div class="step">3</div>
+                </div>
+                
+                <form id="registerForm">
+                    <!-- Step 1: Personal Info -->
+                    <div class="step-content active" id="step1">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="firstName">Nama Depan</label>
+                                <input type="text" id="firstName" class="form-control" placeholder="John" required>
+                                <div class="error-message" id="firstNameError">Nama depan wajib diisi</div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="lastName">Nama Belakang</label>
+                                <input type="text" id="lastName" class="form-control" placeholder="Doe" required>
+                                <div class="error-message" id="lastNameError">Nama belakang wajib diisi</div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" class="form-control" placeholder="contoh@email.com" required>
+                                <div class="error-message" id="emailError">Email tidak valid</div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="phone">Nomor Telepon</label>
+                                <input type="tel" id="phone" class="form-control" placeholder="081234567890" required>
+                                <div class="error-message" id="phoneError">Nomor telepon tidak valid</div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="password">Kata Sandi</label>
+                                <div class="password-input">
+                                    <input type="password" id="password" class="form-control" placeholder="Minimal 6 karakter" required>
+                                    <button type="button" class="toggle-password" id="togglePassword">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                                <div class="password-strength">
+                                    <div class="strength-meter" id="strengthMeter"></div>
+                                </div>
+                                <div class="strength-text" id="strengthText"></div>
+                                <div class="error-message" id="passwordError">Kata sandi minimal 6 karakter</div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="confirmPassword">Konfirmasi Kata Sandi</label>
+                                <div class="password-input">
+                                    <input type="password" id="confirmPassword" class="form-control" placeholder="Ulangi kata sandi" required>
+                                    <button type="button" class="toggle-password" id="toggleConfirmPassword">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                                <div class="error-message" id="confirmPasswordError">Kata sandi tidak cocok</div>
+                            </div>
+                        </div>
+                        
+                        <div class="step-navigation">
+                            <button type="button" class="btn btn-secondary" disabled>Sebelumnya</button>
+                            <button type="button" class="btn btn-primary" onclick="nextStep(2)">Berikutnya</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 2: Education Info -->
+                    <div class="step-content" id="step2">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="educationLevel">Jenjang Pendidikan</label>
+                                <select id="educationLevel" class="form-control" required>
+                                    <option value="">Pilih jenjang</option>
+                                    <option value="sma">SMA/Sederajat</option>
+                                    <option value="d3">D3</option>
+                                    <option value="s1">S1/D4</option>
+                                    <option value="s2">S2</option>
+                                    <option value="s3">S3</option>
+                                </select>
+                                <div class="error-message" id="educationLevelError">Pilih jenjang pendidikan</div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="institution">Sekolah/Kampus</label>
+                                <input type="text" id="institution" class="form-control" placeholder="Nama sekolah/kampus" required>
+                                <div class="error-message" id="institutionError">Nama sekolah/kampus wajib diisi</div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="major">Jurusan</label>
+                                <input type="text" id="major" class="form-control" placeholder="Jurusan Anda" required>
+                                <div class="error-message" id="majorError">Jurusan wajib diisi</div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="gpa">IPK/Nilai Rata-rata</label>
+                                <input type="number" id="gpa" class="form-control" placeholder="Contoh: 3.5" step="0.01" min="0" max="4" required>
+                                <div class="error-message" id="gpaError">Masukkan IPK yang valid (0-4)</div>
+                            </div>
+                            
+                            <div class="form-group full-width">
+                                <label for="domicile">Domisili</label>
+                                <select id="domicile" class="form-control">
+                                    <option value="">Pilih domisili</option>
+                                    <option value="3t">Daerah 3T</option>
+                                    <option value="non-3t">Non-3T</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="step-navigation">
+                            <button type="button" class="btn btn-secondary" onclick="prevStep(1)">Sebelumnya</button>
+                            <button type="button" class="btn btn-primary" onclick="nextStep(3)">Berikutnya</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 3: Additional Info & Terms -->
+                    <div class="step-content" id="step3">
+                        <div class="form-group">
+                            <label>Prestasi (Opsional)</label>
+                            <div style="display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 0.5rem;">
+                                <label style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <input type="checkbox" name="achievements" value="academic">
+                                    <span>Akademik</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <input type="checkbox" name="achievements" value="sports">
+                                    <span>Olahraga</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <input type="checkbox" name="achievements" value="arts">
+                                    <span>Seni</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <input type="checkbox" name="achievements" value="organization">
+                                    <span>Organisasi</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group full-width">
+                            <label for="economicCondition">Kondisi Ekonomi (Opsional)</label>
+                            <select id="economicCondition" class="form-control">
+                                <option value="">Pilih kondisi ekonomi</option>
+                                <option value="low">Kurang mampu</option>
+                                <option value="middle">Menengah</option>
+                                <option value="high">Mampu</option>
+                                <option value="prefer-not">Lebih baik tidak menjawab</option>
+                            </select>
+                        </div>
+                        
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="terms" required>
+                            <label for="terms">
+                                Saya setuju dengan <a href="terms.html">Syarat dan Ketentuan</a> dan 
+                                <a href="privacy.html">Kebijakan Privasi</a> PINTAR-BEASISWA
+                            </label>
+                        </div>
+                        
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="newsletter">
+                            <label for="newsletter">
+                                Saya ingin menerima informasi tentang beasiswa dan promosi via email
+                            </label>
+                        </div>
+                        
+                        <div class="step-navigation">
+                            <button type="button" class="btn btn-secondary" onclick="prevStep(2)">Sebelumnya</button>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-user-plus"></i> Daftar Sekarang
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                
+                <div class="auth-footer">
+                    <p>Sudah punya akun? <a href="login.html">Masuk di sini</a></p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container footer-content">
+            <div class="footer-logo">
+                <img src="LOGO NEXTRE.png" alt="Logo" class="logo" style="height: auto;">
+                <p style="height: auto;">PINTAR-BEASISWA © 2024</p>
+            </div>
+            <ul class="footer-links">
+                <li><a href="home.html">Tentang Kami</a></li>
+                <li><a href="about.html">Kebijakan Privasi</a></li>
+                <li><a href="contact.html">Kontak</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script src="auth.js"></script>
+    <script>
+        let currentStep = 1;
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            setupFormValidation();
+            setupPasswordToggle();
+            setupPasswordStrength();
+        });
+        
+        function setupFormValidation() {
+            // Real-time validation for step 1
+            const step1Fields = ['firstName', 'lastName', 'email', 'phone', 'password', 'confirmPassword'];
+            step1Fields.forEach(field => {
+                const input = document.getElementById(field);
+                if (input) {
+                    input.addEventListener('input', function() {
+                        validateField(field, this.value);
+                    });
+                }
+            });
+            
+            // Real-time validation for step 2
+            const step2Fields = ['educationLevel', 'institution', 'major', 'gpa'];
+            step2Fields.forEach(field => {
+                const input = document.getElementById(field);
+                if (input) {
+                    input.addEventListener('input', function() {
+                        validateField(field, this.value);
+                    });
+                }
+            });
+        }
+        
+        function setupPasswordToggle() {
+            const toggleButtons = [
+                { button: 'togglePassword', input: 'password' },
+                { button: 'toggleConfirmPassword', input: 'confirmPassword' }
+            ];
+            
+            toggleButtons.forEach(item => {
+                const button = document.getElementById(item.button);
+                const input = document.getElementById(item.input);
+                
+                if (button && input) {
+                    button.addEventListener('click', function() {
+                        const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
+                        input.setAttribute('type', type);
+                        this.innerHTML = type === 'password' ? '<i class="fas fa-eye"></i>' : '<i class="fas fa-eye-slash"></i>';
+                    });
+                }
+            });
+        }
+        
+        function setupPasswordStrength() {
+            const passwordInput = document.getElementById('password');
+            const confirmInput = document.getElementById('confirmPassword');
+            const strengthMeter = document.getElementById('strengthMeter');
+            const strengthText = document.getElementById('strengthText');
+            
+            passwordInput.addEventListener('input', function() {
+                const password = this.value;
+                let strength = 0;
+                let text = '';
+                
+                if (password.length >= 6) strength++;
+                if (password.match(/[a-z]+/)) strength++;
+                if (password.match(/[A-Z]+/)) strength++;
+                if (password.match(/[0-9]+/)) strength++;
+                if (password.match(/[$@#&!]+/)) strength++;
+                
+                // Update strength meter
+                strengthMeter.className = 'strength-meter';
+                if (strength > 0) {
+                    if (strength < 3) {
+                        strengthMeter.classList.add('weak');
+                        text = 'Lemah';
+                    } else if (strength < 5) {
+                        strengthMeter.classList.add('medium');
+                        text = 'Sedang';
+                    } else {
+                        strengthMeter.classList.add('strong');
+                        text = 'Kuat';
+                    }
+                }
+                
+                strengthText.textContent = text;
+                
+                // Validate confirmation
+                if (confirmInput.value) {
+                    validateField('confirmPassword', confirmInput.value);
+                }
+            });
+            
+            confirmInput.addEventListener('input', function() {
+                validateField('confirmPassword', this.value);
+            });
+        }
+        
+        function validateField(field, value) {
+            const errorElement = document.getElementById(field + 'Error');
+            
+            if (!errorElement) return true;
+            
+            let isValid = true;
+            
+            switch(field) {
+                case 'firstName':
+                case 'lastName':
+                    isValid = FormValidator.validateName(value);
+                    break;
+                case 'email':
+                    isValid = FormValidator.validateEmail(value);
+                    break;
+                case 'phone':
+                    isValid = FormValidator.validatePhone(value);
+                    break;
+                case 'password':
+                    isValid = FormValidator.validatePassword(value);
+                    break;
+                case 'confirmPassword':
+                    const password = document.getElementById('password').value;
+                    isValid = value === password;
+                    break;
+                case 'educationLevel':
+                case 'institution':
+                case 'major':
+                    isValid = value.trim().length > 0;
+                    break;
+                case 'gpa':
+                    const gpa = parseFloat(value);
+                    isValid = !isNaN(gpa) && gpa >= 0 && gpa <= 4;
+                    break;
+            }
+            
+            if (isValid) {
+                errorElement.classList.remove('show');
+            } else {
+                errorElement.classList.add('show');
+            }
+            
+            return isValid;
+        }
+        
+        function validateStep(step) {
+            let isValid = true;
+            
+            if (step === 1) {
+                const fields = ['firstName', 'lastName', 'email', 'phone', 'password', 'confirmPassword'];
+                fields.forEach(field => {
+                    const value = document.getElementById(field).value;
+                    if (!validateField(field, value)) {
+                        isValid = false;
+                    }
+                });
+            } else if (step === 2) {
+                const fields = ['educationLevel', 'institution', 'major', 'gpa'];
+                fields.forEach(field => {
+                    const value = document.getElementById(field).value;
+                    if (!validateField(field, value)) {
+                        isValid = false;
+                    }
+                });
+            } else if (step === 3) {
+                const terms = document.getElementById('terms');
+                if (!terms.checked) {
+                    alert('Anda harus menyetujui Syarat dan Ketentuan');
+                    isValid = false;
+                }
+            }
+            
+            return isValid;
+        }
+        
+        function nextStep(next) {
+            if (!validateStep(currentStep)) {
+                return;
+            }
+            
+            // Hide current step
+            document.getElementById('step' + currentStep).classList.remove('active');
+            document.querySelectorAll('.step')[currentStep - 1].classList.remove('active');
+            
+            // Show next step
+            document.getElementById('step' + next).classList.add('active');
+            document.querySelectorAll('.step')[next - 1].classList.add('active');
+            
+            currentStep = next;
+        }
+        
+        function prevStep(prev) {
+            // Hide current step
+            document.getElementById('step' + currentStep).classList.remove('active');
+            document.querySelectorAll('.step')[currentStep - 1].classList.remove('active');
+            
+            // Show previous step
+            document.getElementById('step' + prev).classList.add('active');
+            document.querySelectorAll('.step')[prev - 1].classList.add('active');
+            
+            currentStep = prev;
+        }
+        
+        // Form submission
+        document.getElementById('registerForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            if (!validateStep(3)) {
+                return;
+            }
+            
+            // Collect form data
+            const formData = {
+                firstName: document.getElementById('firstName').value,
+                lastName: document.getElementById('lastName').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                password: document.getElementById('password').value,
+                educationLevel: document.getElementById('educationLevel').value,
+                institution: document.getElementById('institution').value,
+                major: document.getElementById('major').value,
+                gpa: parseFloat(document.getElementById('gpa').value),
+                domicile: document.getElementById('domicile').value,
+                economicCondition: document.getElementById('economicCondition').value,
+                achievements: Array.from(document.querySelectorAll('input[name="achievements"]:checked')).map(cb => cb.value),
+                newsletter: document.getElementById('newsletter').checked
+            };
+            
+            try {
+                // Show loading
+                const submitBtn = this.querySelector('button[type="submit"]');
+                const originalText = submitBtn.innerHTML;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Memproses...';
+                submitBtn.disabled = true;
+                
+                // Simulate API call
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                
+                // Mock successful registration
+                AuthService.setUser({
+                    id: 1,
+                    name: formData.firstName + ' ' + formData.lastName,
+                    email: formData.email,
+                    token: 'mock-jwt-token',
+                    profile: formData
+                });
+                
+                // Redirect to dashboard
+                window.location.href = 'dashboard.html';
+                
+            } catch (error) {
+                alert('Pendaftaran gagal. Silakan coba lagi.');
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }
+        });
+    </script>
+    
+    <script src="register.js"></script>
+
+</body>
+</html>

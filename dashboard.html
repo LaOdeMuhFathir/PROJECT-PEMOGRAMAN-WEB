@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - PINTAR-BEASISWA</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="main-header">
+        <nav class="navbar container">
+            <div class="logo-container">
+                <img src="LOGO NEXTRE.png" alt="Logo PINTAR-BEASISWA" class="logo">
+                <div class="logo-text">PINTAR-BEASISWA</div>
+            </div>
+            <div class="user-menu">
+                <div class="user-info">
+                    <span class="user-name">John Doe</span>
+                    <div class="user-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                </div>
+                <div class="dropdown-menu">
+                    <a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                    <a href="#"><i class="fas fa-user-cog"></i> Pengaturan Profil</a>
+                    <a href="#"><i class="fas fa-bell"></i> Notifikasi</a>
+                    <!-- Tombol Logout dengan ID yang benar -->
+                    <a href="index.html" class="logout" id="tombol-keluar" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Keluar</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="dashboard-main">
+        <div class="container">
+            <div class="dashboard-layout">
+                <aside class="sidebar">
+                    <div class="sidebar-menu">
+                        <a href="#" id="sidebar-beranda" class="active">
+                            <i class="fas fa-home"></i> Beranda
+                        </a>
+                        <a href="search.html">
+                            <i class="fas fa-search"></i> Cari Beasiswa
+                        </a>
+                        <a href="#">
+                            <i class="fas fa-heart"></i> Favorit
+                        </a>
+                        <a href="#">
+                            <i class="fas fa-history"></i> Riwayat
+                        </a>
+                        <a href="#">
+                            <i class="fas fa-bell"></i> Pengingat
+                        </a>
+                        <a href="#">
+                            <i class="fas fa-file-alt"></i> Dokumen
+                        </a>
+                        <a href="#">
+                            <i class="fas fa-cog"></i> Pengaturan
+                        </a>
+                    </div>
+                </aside>
+
+                <div class="dashboard-content" id="konten-utama">
+                    <div class="welcome-banner">
+                        <h1>Selamat Datang, <span class="user-highlight"></span>!</h1>
+                        <p>Kami telah menemukan <strong>15 beasiswa</strong> yang cocok untuk Anda</p>
+                    </div>
+
+                    <div class="stats-cards">
+                        <div class="stat-card">
+                            <div class="stat-icon" style="background-color: #73ABBC;">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>Beasiswa Cocok</h3>
+                                <p class="stat-number">15</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon" style="background-color: #F5D68B;">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>Batas Waktu Dekat</h3>
+                                <p class="stat-number">5</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon" style="background-color: #E2DDB7;">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>Sudah Daftar</h3>
+                                <p class="stat-number">3</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon" style="background-color: #77AFC0;">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>Favorit</h3>
+                                <p class="stat-number">8</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-section">
+                        <h2 class="section-title">Rekomendasi Untuk Anda</h2>
+                        <div class="scholarships-grid">
+                            </div>
+                    </div>
+
+                    <div class="dashboard-section">
+                        <h2 class="section-title">Batas Waktu Mendekat ⏰</h2>
+                        <div class="deadline-list">
+                            </div>
+                    </div>
+
+                    <div class="dashboard-section">
+                        <h2 class="section-title">Aktivitas Terakhir</h2>
+                        <div class="activity-timeline">
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container footer-content">
+            <div class="footer-logo">
+                <img src="LOGO NEXTRE.png" alt="Logo" class="logo" style="height: auto;">
+                <p style="height: auto;">PINTAR-BEASISWA © 2024</p>
+            </div>
+            <ul class="footer-links">
+                <li><a href="home.html">Tentang</a></li>
+                <li><a href="contact.html">Bantuan</a></li>
+                <li><a href="#">Privasi</a></li>
+            </ul>
+        </div>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <script src="dashboard.js"></script>
+    <script>
+        localStorage.setItem('user', JSON.stringify({name:'Nama Saya', email:'a@b.com'}));
+        localStorage.setItem('isAuthenticated','true');
+        function logout() {
+            localStorage.removeItem('user');
+            localStorage.removeItem('isAuthenticated');
+            window.location.replace('index.html');
+        }
+    </script>
+</body>
+</html>

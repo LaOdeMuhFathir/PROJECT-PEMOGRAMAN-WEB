@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masuk - PINTAR-BEASISWA</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .auth-container {
+            min-height: calc(100vh - 200px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        
+        .auth-card {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 500px;
+        }
+        
+        .auth-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .auth-header h1 {
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+        
+        .auth-header p {
+            color: #666;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 2px solid #E2DDB7;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: #73ABBC;
+        }
+        
+        .password-input {
+            position: relative;
+        }
+        
+        .toggle-password {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #666;
+            cursor: pointer;
+        }
+        
+        .auth-footer {
+            text-align: center;
+            margin-top: 2rem;
+            color: #666;
+        }
+        
+        .auth-footer a {
+            color: #73ABBC;
+            text-decoration: none;
+        }
+        
+        .remember-forgot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .forgot-link {
+            color: #73ABBC;
+            text-decoration: none;
+        }
+        
+        .divider {
+            text-align: center;
+            margin: 2rem 0;
+            position: relative;
+        }
+        
+        .divider::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 100%;
+            height: 1px;
+            background: #eee;
+        }
+        
+        .divider span {
+            background: white;
+            padding: 0 1rem;
+            color: #666;
+            position: relative;
+        }
+        
+        .social-login {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+        
+        .social-btn {
+            flex: 1;
+            padding: 0.8rem;
+            border: 2px solid #E2DDB7;
+            border-radius: 10px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .social-btn:hover {
+            border-color: #73ABBC;
+        }
+        
+        .error-message {
+            color: #e74c3c;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+        
+        .error-message.show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <nav class="navbar container">
+            <div class="logo-container">
+                <img src="LOGO NEXTRE.png" alt="Logo PINTAR-BEASISWA" class="logo">
+                <a href="index.html" style="text-decoration: none;">
+                    <div class="logo-text">PINTAR-BEASISWA</div>
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Beranda</a></li>
+                <li><a href="home.html">Tentang Kami</a></li>
+                <li><a href="register.html" class="btn btn-primary">Daftar Gratis</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="auth-container">
+            <div class="auth-card">
+                <div class="auth-header">
+                    <h1>Masuk ke Akun Anda</h1>
+                    <p>Akses semua fitur PINTAR-BEASISWA</p>
+                </div>
+                
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="email">Email atau Nomor Telepon</label>
+                        <input type="text" id="email" class="form-control" placeholder="contoh@email.com" required>
+                        <div class="error-message" id="emailError">Email tidak valid</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password">Kata Sandi</label>
+                        <div class="password-input">
+                            <input type="password" id="password" class="form-control" placeholder="Masukkan kata sandi" required>
+                            <button type="button" class="toggle-password" id="togglePassword">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <div class="error-message" id="passwordError">Kata sandi minimal 6 karakter</div>
+                    </div>
+                    
+                    <div class="remember-forgot">
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="remember">
+                            <label for="remember">Ingat saya</label>
+                        </div>
+                        <a href="forgot-password.html" class="forgot-link">Lupa kata sandi?</a>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary" style="width: 100%; padding: 1rem;">
+                        <i class="fas fa-sign-in-alt"></i> Masuk
+                    </button>
+                </form>
+                
+                <div class="divider">
+                    <span>Atau masuk dengan</span>
+                </div>
+                
+                <div class="social-login">
+                    <button type="button" class="social-btn" onclick="loginWithGoogle()">
+                        <i class="fab fa-google" style="color: #DB4437;"></i>
+                        Google
+                    </button>
+                    <button type="button" class="social-btn" onclick="loginWithFacebook()">
+                        <i class="fab fa-facebook" style="color: #4267B2;"></i>
+                        Facebook
+                    </button>
+                </div>
+                
+                <div class="auth-footer">
+                    <p>Belum punya akun? <a href="register.html">Daftar sekarang</a></p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container footer-content">
+            <div class="footer-logo">
+                <img src="LOGO NEXTRE.png" alt="Logo" class="logo" style="height: auto;">
+                <p style="height: auto;">PINTAR-BEASISWA © 2024</p>
+            </div>
+            <ul class="footer-links">
+                <li><a href="home.html">Tentang Kami</a></li>
+                <li><a href="about.html">Kebijakan Privasi</a></li>
+                <li><a href="contact.html">Kontak</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script src="auth.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginForm = document.getElementById('loginForm');
+            const togglePassword = document.getElementById('togglePassword');
+            const passwordInput = document.getElementById('password');
+            
+            // Toggle password visibility
+            togglePassword.addEventListener('click', function() {
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+                this.innerHTML = type === 'password' ? '<i class="fas fa-eye"></i>' : '<i class="fas fa-eye-slash"></i>';
+            });
+            
+            // Form validation
+            loginForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                const email = document.getElementById('email').value.trim();
+                const password = document.getElementById('password').value;
+                
+                let isValid = true;
+                
+                // Reset errors
+                document.getElementById('emailError').classList.remove('show');
+                document.getElementById('passwordError').classList.remove('show');
+                
+                // Validate email
+                if (!email || !FormValidator.validateEmail(email)) {
+                    document.getElementById('emailError').classList.add('show');
+                    isValid = false;
+                }
+                
+                // Validate password
+                if (!password || !FormValidator.validatePassword(password)) {
+                    document.getElementById('passwordError').classList.add('show');
+                    isValid = false;
+                }
+                
+                if (isValid) {
+                    try {
+                        // Show loading
+                        const submitBtn = loginForm.querySelector('button[type="submit"]');
+                        const originalText = submitBtn.innerHTML;
+                        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Memproses...';
+                        submitBtn.disabled = true;
+                        
+                        // Simulate API call
+                        await new Promise(resolve => setTimeout(resolve, 1500));
+                        
+                        // Mock successful login
+                        AuthService.setUser({
+                            id: 1,
+                            name: 'John Doe',
+                            email: email,
+                            token: 'mock-jwt-token'
+                        });
+                        
+                        // Redirect to dashboard
+                        window.location.href = 'dashboard.html';
+                        
+                    } catch (error) {
+                        alert('Login gagal. Periksa kredensial Anda.');
+                        submitBtn.innerHTML = originalText;
+                        submitBtn.disabled = false;
+                    }
+                }
+            });
+            
+            // Real-time validation
+            document.getElementById('email').addEventListener('input', function() {
+                if (FormValidator.validateEmail(this.value.trim())) {
+                    document.getElementById('emailError').classList.remove('show');
+                }
+            });
+            
+            document.getElementById('password').addEventListener('input', function() {
+                if (FormValidator.validatePassword(this.value)) {
+                    document.getElementById('passwordError').classList.remove('show');
+                }
+            });
+        });
+        
+        function loginWithGoogle() {
+            alert('Login dengan Google akan diimplementasikan');
+            // Implement Google OAuth here
+        }
+        
+        function loginWithFacebook() {
+            alert('Login dengan Facebook akan diimplementasikan');
+            // Implement Facebook OAuth here
+        }
+    </script>
+</body>
+</html>

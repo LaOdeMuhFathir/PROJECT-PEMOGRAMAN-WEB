@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontak - PINTAR-BEASISWA</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .contact-hero {
+            background: linear-gradient(135deg, #73ABBC 0%, #77AFC0 100%);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        .contact-content {
+            padding: 5rem 0;
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .contact-info {
+            padding-right: 2rem;
+        }
+        
+        .contact-info h2 {
+            color: #333;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+        }
+        
+        .contact-info p {
+            color: #666;
+            line-height: 1.7;
+            margin-bottom: 2rem;
+        }
+        
+        .contact-methods {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+        
+        .contact-method {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+        
+        .method-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #F5D68B 0%, #E2DDB7 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            flex-shrink: 0;
+        }
+        
+        .method-info h3 {
+            color: #333;
+            margin-bottom: 0.3rem;
+            font-size: 1.1rem;
+        }
+        
+        .method-info p {
+            color: #666;
+            margin: 0;
+            line-height: 1.5;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: #73ABBC;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+        
+        .social-link:hover {
+            transform: translateY(-3px);
+        }
+        
+        .contact-form-container {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .contact-form h2 {
+            color: #333;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 2px solid #E2DDB7;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: #73ABBC;
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        
+        .faq-section {
+            padding: 4rem 0;
+            background: linear-gradient(135deg, #F5D68B 0%, #E2DDB7 100%);
+        }
+        
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .faq-container h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+        
+        .faq-item {
+            background: white;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .faq-question {
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #333;
+            font-weight: 600;
+        }
+        
+        .faq-answer {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .faq-item.active .faq-answer {
+            padding: 0 1.5rem 1.5rem;
+            max-height: 500px;
+        }
+        
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+        
+        .faq-question i {
+            transition: transform 0.3s ease;
+        }
+        
+        .map-section {
+            padding: 4rem 0;
+            background: white;
+        }
+        
+        .map-container {
+            max-width: 800px;
+            margin: 0 auto;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .map-placeholder {
+            background: linear-gradient(135deg, #73ABBC 0%, #77AFC0 100%);
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+        }
+        
+        .map-placeholder i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        @media (max-width: 992px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            
+            .contact-info {
+                padding-right: 0;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-form-container {
+                padding: 1.5rem;
+            }
+            
+            .faq-question {
+                padding: 1rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <nav class="navbar container">
+            <div class="logo-container">
+                <img src="LOGO NEXTRE.png" alt="Logo PINTAR-BEASISWA" class="logo">
+                <a href="index.html" style="text-decoration: none;">
+                    <div class="logo-text">PINTAR-BEASISWA</div>
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Beranda</a></li>
+                <li><a href="home.html">Tentang</a></li>
+                <li><a href="search.html">Cari Beasiswa</a></li>
+                <li><a href="login.html" class="btn btn-secondary">Masuk</a></li>
+                <li><a href="register.html" class="btn btn-primary">Daftar Gratis</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="contact-hero">
+            <div class="container">
+                <h1>Hubungi Kami</h1>
+                <p>Kami selalu siap membantu Anda menemukan jalur pendidikan terbaik</p>
+            </div>
+        </section>
+
+        <section class="contact-content">
+            <div class="container">
+                <div class="contact-grid">
+                    <div class="contact-info">
+                        <h2>Mari Berbincang</h2>
+                        <p>Ada pertanyaan tentang beasiswa? Butuh bantuan dengan pendaftaran? Atau ingin memberikan masukan? Tim kami siap membantu Anda.</p>
+                        
+                        <div class="contact-methods">
+                            <div class="contact-method">
+                                <div class="method-icon">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div class="method-info">
+                                    <h3>Email</h3>
+                                    <p>info@pintar-beasiswa.id</p>
+                                    <p>support@pintar-beasiswa.id</p>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-method">
+                                <div class="method-icon">
+                                    <i class="fas fa-phone"></i>
+                                </div>
+                                <div class="method-info">
+                                    <h3>Telepon</h3>
+                                    <p>+62 21 1234 5678 (Kantor)</p>
+                                    <p>+62 812 3456 7890 (WhatsApp)</p>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-method">
+                                <div class="method-icon">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div class="method-info">
+                                    <h3>Kantor</h3>
+                                    <p>Jl. Pendidikan No. 123</p>
+                                    <p>Jakarta Selatan, DKI Jakarta 12560</p>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-method">
+                                <div class="method-icon">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div class="method-info">
+                                    <h3>Jam Operasional</h3>
+                                    <p>Senin - Jumat: 08.00 - 17.00 WIB</p>
+                                    <p>Sabtu: 09.00 - 15.00 WIB</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h3 style="margin-bottom: 1rem; color: #333;">Ikuti Kami</h3>
+                            <div class="social-links">
+                                <a href="#" class="social-link">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                                <a href="#" class="social-link">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                                <a href="#" class="social-link">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                                <a href="#" class="social-link">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                                <a href="#" class="social-link">
+                                    <i class="fab fa-youtube"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-form-container">
+                        <form class="contact-form" id="contactForm">
+                            <h2>Kirim Pesan</h2>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="name">Nama Lengkap</label>
+                                    <input type="text" id="name" class="form-control" placeholder="Masukkan nama Anda" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="email" id="email" class="form-control" placeholder="contoh@email.com" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="subject">Subjek</label>
+                                <input type="text" id="subject" class="form-control" placeholder="Subjek pesan Anda" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="category">Kategori Pertanyaan</label>
+                                <select id="category" class="form-control" required>
+                                    <option value="">Pilih kategori</option>
+                                    <option value="beasiswa">Informasi Beasiswa</option>
+                                    <option value="pendaftaran">Proses Pendaftaran</option>
+                                    <option value="teknis">Masalah Teknis</option>
+                                    <option value="kerjasama">Kerjasama Institusi</option>
+                                    <option value="lainnya">Lainnya</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="message">Pesan</label>
+                                <textarea id="message" class="form-control" placeholder="Tulis pesan Anda di sini..." required></textarea>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary" style="width: 100%; padding: 1rem;">
+                                <i class="fas fa-paper-plane"></i> Kirim Pesan
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="faq-section">
+            <div class="container">
+                <div class="faq-container">
+                    <h2>Pertanyaan yang Sering Diajukan</h2>
+                    
+                    <div class="faq-item" id="faq1">
+                        <div class="faq-question" onclick="toggleFAQ('faq1')">
+                            <span>Bagaimana cara mendaftar di PINTAR-BEASISWA?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Untuk mendaftar, klik tombol "Daftar Gratis" di halaman utama atau menu navigasi. Isi formulir pendaftaran dengan data pribadi Anda, lalu verifikasi email. Setelah itu, Anda bisa login dan mulai menggunakan semua fitur kami.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item" id="faq2">
+                        <div class="faq-question" onclick="toggleFAQ('faq2')">
+                            <span>Apakah layanan ini benar-benar gratis?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Ya, PINTAR-BEASISWA sepenuhnya gratis untuk pengguna. Kami tidak memungut biaya apapun untuk pendaftaran, pencarian beasiswa, atau konsultasi informasi beasiswa.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item" id="faq3">
+                        <div class="faq-question" onclick="toggleFAQ('faq3')">
+                            <span>Bagaimana sistem rekomendasi beasiswa bekerja?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Sistem kami menganalisis profil pendidikan, prestasi, kondisi ekonomi, dan preferensi Anda. Kemudian mencocokkannya dengan database beasiswa yang ada. Hasilnya adalah rekomendasi beasiswa yang paling sesuai dengan profil Anda.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item" id="faq4">
+                        <div class="faq-question" onclick="toggleFAQ('faq4')">
+                            <span>Apakah informasi beasiswa selalu diperbarui?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Ya, tim kami secara rutin memperbarui database beasiswa. Kami juga memiliki sistem notifikasi otomatis untuk mengingatkan pengguna tentang beasiswa yang hampir tutup pendaftarannya.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item" id="faq5">
+                        <div class="faq-question" onclick="toggleFAQ('faq5')">
+                            <span>Bagaimana cara beasiswa didaerah 3T mengakses platform ini?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Platform kami dioptimalkan untuk koneksi internet yang lambat dan bisa diakses melalui mode teks ringan. Kami juga menyediakan panduan offline dan bekerja sama dengan sekolah-sekolah di daerah 3T untuk memfasilitasi akses.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="map-section">
+            <div class="container">
+                <div class="map-container">
+                    <div class="map-placeholder">
+                        <i class="fas fa-map-marked-alt"></i>
+                        <h3>Lokasi Kantor Kami</h3>
+                        <p>Jl. Pendidikan No. 123, Jakarta Selatan</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container footer-content">
+            <div class="footer-logo">
+                <img src="LOGO NEXTRE.png" alt="Logo" class="logo" style="height: 40px;">
+                <p>PINTAR-BEASISWA © 2024</p>
+            </div>
+            <ul class="footer-links">
+                <li><a href="home.html">Tentang</a></li>
+                <li><a href="contact.html">Kontak</a></li>
+                <li><a href="about.html">Privasi</a></li>
+                <li><a href="about.html">Syarat</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script>
+        // FAQ Toggle Function
+        function toggleFAQ(id) {
+            const faqItem = document.getElementById(id);
+            faqItem.classList.toggle('active');
+        }
+
+        // Contact Form Submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                subject: document.getElementById('subject').value,
+                category: document.getElementById('category').value,
+                message: document.getElementById('message').value
+            };
+            
+            // Show loading
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Mengirim...';
+            submitBtn.disabled = true;
+            
+            // Simulate API call
+            setTimeout(() => {
+                // Reset form
+                this.reset();
+                
+                // Show success message
+                alert('Terima kasih! Pesan Anda telah berhasil dikirim. Tim kami akan menghubungi Anda dalam 1-2 hari kerja.');
+                
+                // Reset button
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }, 1500);
+        });
+
+        // Initialize FAQs
+        document.addEventListener('DOMContentLoaded', function() {
+            // Optional: Open first FAQ by default
+            // toggleFAQ('faq1');
+        });
+    </script>
+</body>
+</html>
